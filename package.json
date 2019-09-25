@@ -1,0 +1,39 @@
+{
+  "name": "async-local",
+  "version": "1.0.0",
+  "description": "async_hooks based local storage aka thread-local concept in java",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/*.js --exit",
+    "coverage": "nyc --reporter=lcov --reporter=text-summary mocha test/*.js --exit",
+    "lint": "eslint --quiet -c .eslintrc index.js",
+    "lint-fix": "eslint --fix index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dimichgh/async-local.git"
+  },
+  "keywords": [
+    "cls",
+    "thread",
+    "local",
+    "storage",
+    "request"
+  ],
+  "author": "Dmytro Semenov <dimichsdg@yahoo.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dimichgh/async-local/issues"
+  },
+  "homepage": "https://github.com/dimichgh/async-local#readme",
+  "devDependencies": {
+    "mocha": "^6.2.0",
+    "nyc": "^14.1.1"
+  },
+  "dependencies": {
+    "emitter-listener": "^1.1.2",
+    "eslint": "^6.3.0",
+    "eslint-config-ebay": "^1.1.1",
+    "eslint-plugin-mocha": "^6.1.0"
+  }
+}
