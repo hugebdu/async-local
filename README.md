@@ -9,15 +9,15 @@ async_hooks based local storage aka thread-local concept in java world.
 
 The module provides a single layer of local storage for async flow, which is more than enough for a big platform.
 
-# Install
+## Install
 
 ```bash
 npm -i async-local
 ```
 
-# Usage
+## Usage
 
-## Express middleware example
+### Express middleware example
 
 ```javascript
 const AsyncLocal = require('async-local');
@@ -27,12 +27,13 @@ app.use((req, res, next) => {
     AsyncLocal.run(next);
 });
 ```
-## Storing/reading data
+
+### Storing/reading data
 
 ```javascript
 const AsyncLocal = require('async-local');
 console.log(AsyncLocal.get('foo')); // >>> undefined
-AsyncLocal.set('foo', 'bar'); // >>> throw error if not context is setup
+AsyncLocal.set('foo', 'bar'); // >>> throw error if no context is setup
 
 AsyncLocal.run(ctx => {
     AsyncLocal.set('foo', 'bar');
@@ -65,7 +66,7 @@ AsyncLocal.run(ctx => {
 
 ## Binding context
 
-There are some edge cases when context is not preserves in async flow. For such cases, it makes sense to bind context to the function or emitter
+There are some edge cases when context is not preserved in async flow. For such cases, it makes sense to bind context to the function or emitter explicitly.
 
 ```javascript
 const EventEmitter = require('events');
