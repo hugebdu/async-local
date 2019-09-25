@@ -30,7 +30,7 @@ class AsyncContext extends AsyncResource {
     get(name) {
         const val = this[name];
         if (val === undefined && this.$inherit) {
-            const parentContext = this.getParentContext()
+            const parentContext = this.getParentContext();
             return parentContext && parentContext.get(name);
         }
 
@@ -48,11 +48,12 @@ class AsyncContext extends AsyncResource {
         return function contextBound(...args) {
             try {
                 return context.runInAsyncScope(fn, this, ...args);
-            } catch (err) {
+            }
+            catch (err) {
                 err['async-local@context'] = context;
                 throw err;
             }
-        }
+        };
     }
 
     bindEmitter(emitter) {
@@ -80,14 +81,14 @@ class AsyncContext extends AsyncResource {
     }
 }
 
-let contexts = new Map();
+const contexts = new Map();
 
 class AsyncLocal {
     /**
      * Special function called by async_hooks
-     * @param {Number} asyncId 
-     * @param {String} type 
-     * @param {Number} triggerAsyncId 
+     * @param {Number} asyncId
+     * @param {String} type
+     * @param {Number} triggerAsyncId
      */
     init(asyncId, type, triggerAsyncId) {
         const parentCtx = contexts.get(triggerAsyncId);
@@ -99,7 +100,7 @@ class AsyncLocal {
 
     /**
      * Special function called by async_hooks
-     * @param {Number} asyncId 
+     * @param {Number} asyncId
      */
     destroy(asyncId) {
         contexts.delete(asyncId);
@@ -114,19 +115,17 @@ class AsyncLocal {
     get(name) {
         const context = this.getContext();
         if (context) {
-            return context.get(name)
-        } else {
-            throw new Error('No async local context has been set up');
+            return context.get(name);
         }
+        throw new Error('No async local context has been set up');
     }
 
     set(name, value) {
         const context = this.getContext();
         if (context) {
             return context.set(name, value);
-        } else {
-            throw new Error('No async local context has been set up');
         }
+        throw new Error('No async local context has been set up');
     }
 
     cleanAll() {
@@ -140,7 +139,7 @@ class AsyncLocal {
      */
     async run(inherit, next) {
         const args = [].slice.call(arguments);
-        inherit = (args.length < 2 || typeof inherit === 'boolean' && inherit) ? true : false;
+        inherit = !!((args.length < 2 || typeof inherit === 'boolean' && inherit));
         next = args.pop();
 
         this.enable();
@@ -150,7 +149,8 @@ class AsyncLocal {
         contexts.set(context.asyncId(), context);
         try {
             return await context.runInAsyncScope(next, null, context);
-        } catch (err) {
+        }
+        catch (err) {
             err['async-local@context'] = context;
             throw err;
         }
@@ -183,7 +183,8 @@ class AsyncLocal {
 }
 
 function createAsyncLocalOnce() {
-    return process._asyncLocal = process._asyncLocal || new AsyncLocal();
+    process._asyncLocal = process._asyncLocal || new AsyncLocal();
+    return process._asyncLocal;
 }
 
 // This is our single registry for all async contexts
