@@ -21,7 +21,7 @@ npm -i async-local
 
 ```javascript
 const AsyncLocal = require('async-local');
-const express = require('express);
+const express = require('express');
 const app = express();
 app.use((req, res, next) => {
     AsyncLocal.run(next);
