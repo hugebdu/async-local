@@ -12,7 +12,7 @@ The module provides a single layer of local storage for async flow, which is mor
 ## Install
 
 ```bash
-npm -i async-local
+npm install async-local -S
 ```
 
 ## Usage
