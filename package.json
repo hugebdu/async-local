@@ -27,14 +27,14 @@
   },
   "homepage": "https://github.com/dimichgh/async-local#readme",
   "devDependencies": {
+    "eslint": "^6.3.0",
+    "eslint-config-ebay": "^1.1.1",
+    "eslint-plugin-mocha": "^6.1.0",
     "mocha": "^6.2.0",
     "nyc": "^14.1.1"
   },
   "dependencies": {
-    "emitter-listener": "^1.1.2",
-    "eslint": "^6.3.0",
-    "eslint-config-ebay": "^1.1.1",
-    "eslint-plugin-mocha": "^6.1.0"
+    "emitter-listener": "^1.1.2"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.com"
